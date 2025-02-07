@@ -1,2 +1,2 @@
 # CS333
-Code for course I took on Programming Languages.
+Code I wrote for the Colby College computer science course CS333: Programming Languages.
