@@ -8,20 +8,19 @@ Date:        2/7/25
 
 #include <stdio.h>
 
-int main(int arg, char * argv[]){
-  int i = 0x29979245;
-  unsigned char * ptr;
-  ptr = (unsigned char *) &i;
+int main(int arg, char *argv[]) {
+    int i = 0x29979245;
+    unsigned char *ptr;
+    ptr = (unsigned char *) &i;
 
-  for (int i = 0; i < sizeof(int); i ++) {
-    printf("%d: %02X\n", i, ptr[i]);
-  }
+    for (int i = 0; i < sizeof(int); i++) {
+        printf("%d: %02X\n", i, ptr[i]);
+    }
 
     if (ptr[0] == 0x29) {
-      printf("Your system is big endian!");
+        printf("Your system is big endian!");
+    } else if (ptr[0] == 0x45) {
+        printf("Your system is little endian!");
     }
-  else if (ptr[0] == 0x45) {
-    printf("Your system is little endian!");
-  }
-  return 0;
+    return 0;
 }
