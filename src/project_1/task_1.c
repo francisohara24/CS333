@@ -1,5 +1,5 @@
 /**
- * File Name:   main.c
+ * File Name:   task_1.c
  * Description: Program that checks whether machine is big or little endian based on byte storage order.
  * Author:      Francis O'Hara
  * Date:        2/9/25
@@ -8,7 +8,6 @@
 #include <stdio.h>
 
 int main(int arg, char *argv[]) {
-    // TASK 1
     char character = (char) 0xA1;
     short short_integer = (short) 0xA1B2;
     int integer = (int) 0xA1B2C3D4;
