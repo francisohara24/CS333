@@ -1,6 +1,6 @@
 /**
  * File Name:   main.c
- * Description: 
+ * Description: Program that checks whether machine is big or little endian based on byte storage order.
  * Author:      Francis O'Hara
  * Date:        2/9/25
  */
