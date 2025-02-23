@@ -60,9 +60,9 @@ than the most significant byte `A1`.
 **Run:** `$ ./task_2`
 
 **Output:**  
-![Screenshot of c task 2](screenshots/c_task_2_1.png)
-![Screenshot of c task 2](screenshots/c_task_2_2.png)
-![Screenshot of c task 2](screenshots/c_task_2_3.png)
+![Screenshot of c task 2](screenshots/c_task_2_1.png)  
+![Screenshot of c task 2](screenshots/c_task_2_2.png)  
+![Screenshot of c task 2](screenshots/c_task_2_3.png)  
 
 
 **Q.b.**  
@@ -106,8 +106,8 @@ But with the `free()` statement, the program requires a constant amount of memor
 **Run:** `$ ./task_4`
 
 **Output:**  
-![Screenshot of C task 4](screenshots/c_task_4_1.png)
-![Screenshot of C task 4](screenshots/c_task_4_2.png)
+![Screenshot of C task 4](screenshots/c_task_4_1.png)  
+![Screenshot of C task 4](screenshots/c_task_4_2.png)  
 
 **Q.a.**  
 For this task, I created 3 different structs: `Structure1`(char, short, int), `Structure2` (char, int, short) and `Structure3`(char, long, int).  
