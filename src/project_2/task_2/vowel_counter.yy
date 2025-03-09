@@ -1,6 +1,6 @@
 /**
  * File Name:   vowel_counter.yy
- * Description: A flex program for counting the number of rows, non-newline characters and vowels in an input file.
+ * Description: A flex program for counting the number of rows, characters and vowels in an input file.
  * Author:      Francis O'Hara
  * Date:        3/5/25
  */
@@ -13,7 +13,7 @@
 
 %%
 
-\n              num_rows ++;
+\n              num_rows ++; num_chars++;
 [aeiouAEIOU]    num_vowels ++; num_chars++; num_rows = (num_rows == 0)? 1: num_rows;
 .               num_chars ++; num_rows = (num_rows == 0)? 1: num_rows;
 
