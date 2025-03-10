@@ -1,6 +1,7 @@
 /**
  * File Name:   encode.yy
- * Description: A flex program that shifts each alphabetic character in an input file 13 spaces forward in the alphabet.
+ * Description: A flex program that shifts each alphabetic character in an input file 13 spaces forward in the alphabet
+                with wraparound from z back to a.
  * Author:      Francis O'Hara
  * Date:        3/03/25
  */

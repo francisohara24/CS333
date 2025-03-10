@@ -440,11 +440,12 @@ char *yytext;
 #line 1 "encode.yy"
 /**
  * File Name:   encode.yy
- * Description: A flex program that shifts each alphabetic character in an input file 13 spaces forward in the alphabet.
+ * Description: A flex program that shifts each alphabetic character in an input file 13 spaces forward in the alphabet
+                with wraparound from z back to a.
  * Author:      Francis O'Hara
  * Date:        3/03/25
  */
-#line 447 "lex.yy.c"
+#line 448 "lex.yy.c"
 
 #define INITIAL 0
 
@@ -661,10 +662,10 @@ YY_DECL
 		}
 
 	{
-#line 7 "encode.yy"
+#line 8 "encode.yy"
 
 
-#line 667 "lex.yy.c"
+#line 668 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -723,20 +724,20 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 9 "encode.yy"
+#line 10 "encode.yy"
 printf("%c", 65 + ((*yytext - 52) % 26));
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 10 "encode.yy"
+#line 11 "encode.yy"
 printf("%c", 97 + ((*yytext - 84) % 26));
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 12 "encode.yy"
+#line 13 "encode.yy"
 ECHO;
 	YY_BREAK
-#line 739 "lex.yy.c"
+#line 740 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1741,7 +1742,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 12 "encode.yy"
+#line 13 "encode.yy"
 
 
 int main(int argc, char * argv[]){
