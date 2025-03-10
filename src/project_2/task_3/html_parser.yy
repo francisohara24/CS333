@@ -1,16 +1,17 @@
 /**
  * File Name:   html_parser.yy
- * Description: A flex program for parsing html files.
+ * Description: A flex program for parsing html files. Removes all tags, spaces, tabs, and single newlines, and
+                replaces every occurrence of more than one newline in a row with a single newline character.
  * Author:      Francis O'Hara
  * Date:        3/5/25
 */
 
 %%
 
-\<.+\>    printf("");
-^(\s+)    printf("");
-(\s+)$    printf("");
-\n+       printf("\n");
+\<[^<>]+\>    printf("");
+[ \t]+        printf("");
+\n{2,}        printf("\n");
+\n            printf("");
 
 %%
 
