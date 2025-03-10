@@ -442,9 +442,9 @@ int yy_flex_debug = 0;
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
 char *yytext;
-#line 1 "html_parser.yy"
+#line 1 "html_scanner.yy"
 /**
- * File Name:   html_parser.yy
+ * File Name:   html_scanner.yy
  * Description: A flex program for parsing html files.
  * Author:      Francis O'Hara
  * Date:        3/5/25
@@ -666,7 +666,7 @@ YY_DECL
 		}
 
 	{
-#line 8 "html_parser.yy"
+#line 8 "html_scanner.yy"
 
 
 #line 672 "lex.yy.c"
@@ -729,29 +729,29 @@ do_action:	/* This label is used only to access EOF actions. */
 case 1:
 /* rule 1 can match eol */
 YY_RULE_SETUP
-#line 10 "html_parser.yy"
+#line 10 "html_scanner.yy"
 printf("");
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 11 "html_parser.yy"
+#line 11 "html_scanner.yy"
 printf("");
 	YY_BREAK
 case 3:
 /* rule 3 can match eol */
 YY_RULE_SETUP
-#line 12 "html_parser.yy"
+#line 12 "html_scanner.yy"
 printf("\n");
 	YY_BREAK
 case 4:
 /* rule 4 can match eol */
 YY_RULE_SETUP
-#line 13 "html_parser.yy"
+#line 13 "html_scanner.yy"
 printf("");
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 15 "html_parser.yy"
+#line 15 "html_scanner.yy"
 ECHO;
 	YY_BREAK
 #line 757 "lex.yy.c"
@@ -1759,7 +1759,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 15 "html_parser.yy"
+#line 15 "html_scanner.yy"
 
 
 int main( int argc, char * argv[]) {

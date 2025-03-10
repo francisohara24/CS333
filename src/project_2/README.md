@@ -6,31 +6,27 @@
 
 ## Directory Layout:
 ```
-Project1_fohara27
+Project2_fohara27
     ├── README.md
-    ├── extension_1.c
-    ├── extension_2.c
-    ├── screenshots
-    │   ├── c_extension_1_1.png
-    │   ├── c_extension_2_1.png
-    │   ├── c_task_1_1.png
-    │   ├── c_task_2_1.png
-    │   ├── c_task_2_2.png
-    │   ├── c_task_2_3.png
-    │   ├── c_task_3_1.png
-    │   ├── c_task_3_2.png
-    │   ├── c_task_4_1.png
-    │   ├── c_task_4_2.png
-    │   ├── c_task_4_3.png
-    │   ├── c_task_4_4.jpg
-    │   ├── c_task_4_5.jpg
-    │   └── c_task_5_1.png
-    ├── task_1.c
-    ├── task_2.c
-    ├── task_3.c
-    ├── task_4.c
-    └── task_5.c
-
+    ├── task_1
+    │   ├── encode.yy
+    │   ├── encode_test.txt
+    │   └── lex.yy.c
+    ├── task_2
+    │   ├── lex.yy.c
+    │   ├── vowel_counter.yy
+    │   └── vowel_counter_test.txt
+    ├── task_3
+    │   ├── html_parser.yy
+    │   ├── html_parser_test_1.txt
+    │   ├── html_parser_test_2.txt
+    │   ├── lex.yy.c
+    │   └── output.txt
+    └── task_4
+        ├── clite_parser.yy
+        ├── clite_parser_test.c
+        ├── lex.yy.c
+        └── output.txt
 ```
 ## OS and C compiler
 OS: macOS Ventura 13.7.4  

@@ -1,6 +1,6 @@
 /**
- * File Name:   html_parser.yy
- * Description: A flex program for parsing html files. Removes all tags, spaces, tabs, and single newlines, and
+ * File Name:   html_scanner.yy
+ * Description: A flex program for scanning html files. Ignores all tags, spaces, tabs, and single newlines, and
                 replaces every occurrence of more than one newline in a row with a single newline character.
  * Author:      Francis O'Hara
  * Date:        3/5/25
