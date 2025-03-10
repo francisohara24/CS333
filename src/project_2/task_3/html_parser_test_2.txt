@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+		<title>Project 2 | CS 333</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta charset="utf-8">
+		<meta name="author" content="Ying Li">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+		<link  rel="stylesheet" href="/yingli/teaching/course.css">
+		<!-- add the following three script links into each html -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js">
+		</script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+		</script>
+		<script src="dir.js" type="text/javascript"></script> 
+		<!-- the above dir.js directory may change accrodingly e.g. ../dir.js-->
+  </head>
+  
+  <body>
+
+		<!-- add the below script into each html to generate header-->
+		<script language="javascript" src="../head.js"></script>
+		
+		<div class="container">	 
+			<div class="page-header">
+				<h1>
+				<small>CS 333 Programming Languages</small><br>
+				<span>Project 2</span>
+				</h1>
+			</div>
+
+		<script>$(function(){$("#index").addClass("active")})</script>
+
+    <p class="lead">Due: Wednesday, September 27 2023, 11:59 pm</p>
+
+    <h2>Part I: Lexical Analysis</h2>
+		
+    <p>The first thing we have to do with any programming language is build a 
+			lexical analyzer that converts a text string into a series of tokens. 
+			There are lots of tools for handling this. For this assignment, you'll 
+			make use of the <em>Flex</em> lexical analysis tool and 
+			build a few different parsers.</p>
+			
+			<p>The dwarves in the robotics lab have flex installed already. You can either physically access or remotely SSH to these machines. You should have access to those machines already. If you find yourself don't have access, please let Ying know ASAP. To SSH to one of the machines, use the command line <code>ssh yourColbyUserName@machineName.cs.colby.edu</code>. <a href="dwraf.txt">Here</a> is a list of the machine names. Assume Ying picks fili, the command line would be <code>ssh yingli@fili.cs.colby.edu</code></p>
+			
+		<p>If you want to use your computer for this project and your computer doesn't have Flex installed, here are some resources for Flex installation.
+			<ul>
+				<li>If your computer is a Mac, you can use <a href="https://formulae.brew.sh/formula/flex">homebrew to install Flex</a>.</li>
+				<li>If your computer is a Windows machine and you have Cygwin installed, you can install the <a href="https://cygwin.com/packages/summary/flex-src.html">flex packet</a> provided by Cygwin.</li>
+				<li>If your computer is an Ubuntu box, you can use <a href="https://askubuntu.com/questions/164293/how-to-install-flex"><code>apt-get</code> to install flex.</a> </li>
+			</ul>
+			<p>To check whether you machine has flex install, you can use the command line <code>flex --version</code>. If your machine has flex, you should get some information to indicate the flex version (e.g., flex 2.6.4). </p>
+		</p>
+		
+
+    <h3>Tasks</h3>
+		<p>Flex is an open source lexical analysis tool. The way it works is you 
+			first create an input file that defines symbols and production rules that 
+			describe how to parse a text file. Then you run Flex and it produces a C 
+			file. You can then compile the C file and run it on some input.</p>
+
+    <p>As an example, consider the following <samp>Hello World</samp> program 
+			for Flex. The line beginning with <code>blah</code> defines a rule that 
+			says to replace instances of <code>blah</code> with <code>hello 
+				world</code>.</p>
+
+<pre>
+/**
+* Hello World: replace "blah" with "hello world"
+*/
+
+%%
+
+blah    printf("hello world");
+
+%%
+
+int main ( int argc, char *argv[] ) {
+
+	yylex();
+
+	return 0;
+
+}
+</pre>
+		
+    <p>If you type the above into a file called <samp>replace.yy</samp> and 
+			then execute the following commands, you get the resulting behavior. </p>
+
+    <code> $ flex replace.yy </code> </br>
+    <code> $ gcc -o repl lex.yy.c -ll </code></br>
+		<code> $ echo "blah and another blah" | ./repl </code></br>
+		<code> hello world and another hello world </code></br></br>
+		
+		<p>If you'd like to explore beyond the sample code discussed in class, the <a href="https://westes.github.io/flex/manual/">documentation for 
+			flex</a> provides many more examples and a description of the syntax.</p>
+			
+		<p>Note that flex is based on regular expressions, which are similar to the 
+			extended BNF notation we've gone over in class. There are lots of <a 
+			href="http://www.regular-expressions.info"> documentation for regular 
+			expressions</a>, and they can be very useful in many situations.</p>
+		
+		<ol>
+			<li><p> Using flex, make a program called <samp>encode</samp> that takes 
+				any character in a-z or A-Z and shifts it 13 spaces forward in the 
+				alphabet, with wraparound from z back to a. Run it on a text file of 
+				your choice. You can test that it is working correctly by running the 
+				output of <samp>encode</samp> through <samp>encode</samp> again. The 
+				result should be the original document. Make use of the fact that you 
+				can get the ASCII value of any character by wrapping it in single 
+				quotes (e.g. 'a' is the value 97). You can treat it as an integer and 
+				do math.</p>
+			</li>
+			
+			<li><p>Using Flex, make a program that reads in a text file and tells you 
+				not only the number of rows and characters, but also how many of each 
+				vowel <samp>[a, e, i, o, u]</samp> are in the file.</p>
+			</li>	
+			
+			<li><p>Make a program that strips an html file of tags, single-line comments, and extraneous whitespace.
+                <ul> 
+				<li> An html tag is a string that starts and ends with a pair of angle 
+				brackets <code>&lt;</code> and <code>&gt;</code>. 
+                <li>An html comment is a 
+				string that starts and ends with <code>&lt;!--</code> and 
+				<code>--&gt;</code>. It is relatively straight-forward to remove comments that begin and end on the same line (you can match it with one pattern), but multi-line comments require more careful code. Please remove one-line comments. (Removing multi-line comments is an extension.)
+				<li>It should also strip the file of extraneous whitespace (leading spaces and tabs, trailing spaces and tabs, more hthan one space or tab in a row, more than one newline in a row). Tags such as headers, titles, list beginnings, list items, and paragraphs should put a newline character in.
+                </ul>
+				<p>Test it on <a href="p2_htmltest.txt">this example</a> first. You should get some 
+				output similar to <a href="p2_htmltestrslt.txt">this</a>. Include your output in your README file. Then try 
+				testing it on <a href="p2.txt">this web page</a>. This should be longer, and you are welcome to include it in your README file, but not required to.</p>
+				
+				<p>Note that this is challenging to do in a way that make the output 
+					reasonably formatted, so we will not be grading on perfect formatting. If you pay particular attention to formmatting, be sure to demonstrate and describe it in your README file as an extension. As a straight-forward extension, you can make your program do 
+					more sophisticated things like replace 
+					<code>&amp;gt;</code> with <code>&gt;</code>. As a more complicated extension, you can remove multi-line comments.</p>
+			</li>	
+			
+			<li><p>Implement a parser for Clite. For now, the output of your program 
+				should just be a sequence of strings, one per line. Please use the 
+				following strings.</p>
+				
+				<table class="table table-striped">
+					<tbody>
+						<tr>
+							<td>Integer-&lt;value&gt;</td>
+							<td>A sequence of one or more digits.</td>
+						</tr>
+						<tr>
+							<td>Float-&lt;value&gt;</td>
+							<td>An integer, a dot, and another integer.</td>
+						</tr>
+						<tr>
+							<td>Keyword-&lt;word&gt;</td>
+							<td>if | else | while | for | int | float</td>
+						</tr>
+						<tr>
+							<td>Identifier-&lt;name&gt;</td>
+							<td>Legal names/identifiers.</td>
+						</tr>
+						<tr>
+							<td>Assignment</td>
+							<td> = </td>
+						</tr>
+						<tr>
+							<td>Comparison-&lt;symbol&gt;</td>
+							<td>== | &lt; | &gt; | &lt;= | &gt;=</td>
+						</tr>
+						<tr>
+							<td>Operator-&lt;symbol&gt;</td>
+							<td>+ | - | * | / </td>
+						</tr>
+						<tr>
+							<td>Open-bracket</td>
+							<td> { </td>
+						</tr>
+						<tr>
+							<td>Close-bracket</td>
+							<td> } </td>
+						</tr>
+						<tr>
+							<td>Open-paren</td>
+							<td> ( </td>
+						</tr>
+						<tr>
+							<td>Close-paren</td>
+							<td> ) </td>
+						</tr>
+					</tbody>
+				</table>	
+			
+			<p>Ideally, your program should also ignore comments. You can test your 
+				program on this <a 
+				href="p2-example.c">example</a>. You 
+				should get something like <a 
+				href="p2-example-result.txt">this 
+				result</a>.</p>	
+		</ol>	
+		
+		<h2>Part II: Selected Langauges</h2>
+		<p>Select <em>one</em> language that you don't know and want to learn this 
+			semester from list A in the <a href="../index.html#languages">Languages 
+			section</a> in the syllabus page (Note that it can be the same A langaue 
+			you picked in Project 1). You may work with a partner for the non-C 
+			language 
+			tasks. You and your partner need to choose the same language. You two 
+			will hand in your C work separately, but have a single subpage and handin 
+			for your non-C language assignments (and each person must contribute to 
+			completing the tasks for the selected language).</p>
+			
+		<p>If you want to learn non-C languages from B/C list, you are encouraged 
+			to do so, and it can count your extension. See the Extensions section 
+			below for more details. </p> 
+		
+		<h3>Tasks</h3>
+		<ol>
+			<li><p>Organize your Google Sites home page. It should be a top-level page for the course from which a user can navigate to the selected language and other non-C languages you picked as extensions. There should be a section for each language that should have a link to each project page. If you are working with a partner, there should be only one page for the selected language you learn together, but each of you should have the structure on the home page to navigate to it. In other words, the grader should be able to get to all the pages of your projects from either your or your partner's home page.</p>
+				
+				<p>Make sure there is a link to your project 1 on your top level page 
+					for the course.</p>
+					
+				<p><strong>Having a properly organized home page is worth 3 points in 
+					this project</strong>.</p>
+					
+				<p>Here is a <a href="https://sites.google.com/colby.edu/yings-cs333/home">sample page</a> for your reference.</p>	
+			</li>
+			
+			<li>For each of the selected languages, including the required one and those you picked as extensions (if you want to learn other langauges as extensions), create a subpage for Project 2.</li>
+			
+			<li>The first section of each subpage lists out the language resources. 
+				Spend some time searching for useful resources, documentation, and 
+				formal descriptions of the language. Organize them in a useful way and 
+				annotate the links (e.g. "I found this site useful for explaining the 
+				concept of ..."). Think of it as your reference manual for the rest of 
+				the semester, so make it useful for you.</li>
+				
+			<li>Write a "hello world" program for each language. Do something more 
+				interesting than printing hello world (i.e. don't just copy and paste a 
+				hello world example and do something more than print text). An explanation of what the code is doing, a snapshot 
+				of the program and its outputs are the second section of the report 
+				page.</li>
+		</ol>
+		
+		<h2>Extensions</h2>
+		<p>Extensions are a way for you to customize the assignment and learn 
+			something of interest to you. Pick a task and dig deeper. Pick a 
+			different language and learn something about it. Do something 
+			interesting. The following are possible extensions, but you can choose 
+			your own. Extensions can be undertaken individually or jointly. If you 
+			complete some extension individually, please specify along with your 
+			extension description. The unspecified extensions will be considered as 
+			being undertaken jointly.</p>
+		<ol>
+			<li> Get comments working properly in your parser for Clite. Be sure to 
+				try out a variety of examples.</li>
+			<li> Make the encoder more complex.</li>
+			<li> Make the parser for analyzing a document to some more interesting 
+				things.</li>
+			<li>A perfectly acceptable extension for any assignment going forward is 
+				to do a second language. You are encouraged to pick the second language 
+				from List B or C. The second language should have its own subdirectory 
+				on your Google Sites homepage. Under this subdirectory, there should be a 
+				set of links for all projects.</li>
+		</ol>	
+
+    <h2>Submission</h2>
+    <p>The submission of this project has three components:</p>
+		<ol>
+			<li>Code: Your source code for tasks of part I and the "hello world" 
+				programs of the two selected languages should be in a Folder named Project2_&lt;username&gt;. If you have a 
+				partner, at least one of you should submit the souce code for the 
+				selected langauge. If you pick a second language as your extension, its 
+				"hello world" program should be submitted to the fileserver too. Each 
+				task of part I should have a .yy file and a .c file. It should be clear 
+				which files correspond to which tasks. <em>Note that the quality of 
+				your comments (in all of the programs you implemented) counts toward 
+				your grade.</em> 
+			</li>
+			<li><p>README: Submit a README file to the fileserver for your parsers (flex 
+				tasks). The README file can be a .txt file. It should be well-organized 
+				such that readers can easily understand the usage and the outputs of 
+				each parser. In addition, the known bugs of each parser should also be 
+				indicated in the README file.</p>
+				
+				<p>You can use this <a href="README.txt">README template</a>.</p>
+			</li>
+			<li>Google Sites Report: The report of this project should have the following 
+				elements.
+				<ul>
+					<li>Title of the project and your name</li>
+					<li>Resources for the selected language(s)</li>
+					<li>The snapshot of the "hello world" program(s)</li>
+					<li>The output of the "hello world" program(s)</li>
+				</ul>
+						<p><em>To check whether you've made your report well organized, 
+							you may ask yourself the following questions</em>:</p>
+
+						<ul>
+							<li>Is there a top-level home page that contains a section for each selected language?</li>
+							<li>Does each section have a title (e.g. Ying Li CS 333, 
+								Ying’s Explorations in R, Ying’s Notes in JS)?</li>
+							<li>In each section, are there clearly organized links to 
+								supporting pages?</li>
+							<li>Does each supporting page have a title that indicates its 
+								role in the set of pages?</li>
+						</ul>
+		
+						<p>Here is a recommended layout.</p>
+<pre>
+	Ying Li CS333 (Home Page)
+	|_ P1 (subpage)
+	|
+	|_Ying’s Explorations in R (a section on the home page) 
+	| |
+	| |_P1 (listed in the section with a link to a subpage for P1)
+	| |_P2 (listed in the section with a link to a subpage for P2)
+	| |_...
+	|
+	|_Ying’s Notes in JS (a section on the home page)
+	| |
+	| |_P1 (listed in the section with a link to a subpage for P1)
+	| |_P2 (listed in the section with a link to a subpage for P2)
+	| |_...
+</pre>
+
+<p>Here is a sample <a href="https://sites.google.com/colby.edu/yings-cs333/home">home page</a> that reflects the above layout for your reference. Please log in to Google Sites using your Colby account before clicking the links.</p>
+							
+		</ol>
+		
+		<p>You are expected to submit the source code and README in a .zip file to the Google Classroom Assignment for Project 2.
+		
+		<p>Please note that <b>it is your responsibility to explicitly indicate the 
+			extensions you have undertaken</b>. If you complete extensions for the 
+			parsers, please indicate explicitly in the codes and README file. If you 
+			complete extensions in selected languages, please indicate explicitly in 
+			your Google Sites report. Because extensions can be individual or joint, you need 
+			to indicate this along with your description of the extension. If no 
+			indication is provided, the grader will assume the extensions were 
+			completed jointly.</p>	
+				
+		<p class="lastMod"><small>&copy; 2023 Ying Li. Page last modified:
+			<script>document.write(Date(document.lastModified));</script>
+			<a href="http://validator.w3.org/check?uri=referer">.</a></small></p>
+
+		</div> <!-- container -->
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+  </body>
+</html>
