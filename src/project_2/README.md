@@ -33,7 +33,7 @@ OS: macOS Ventura 13.7.4
 C Compiler: Apple clang version 15.0.0 (clang-1500.1.0.2.5)
 
 
-## Part I
+## Part I: Lexical Analysis
 ### Task 1
 **Description:**  
 A flex-generated lexer that shifts each alphabetic character in an input string 13 spaces forward in the alphabet, with 
@@ -156,21 +156,51 @@ The above output confirms that the generated lexer is able to remove all HTML ta
 
 ### Task 4
 **Description:**  
+A flex-generated parser for C-Lite, a light-weight version of the C programming language.  
+This program not only scans for particular sequences of characters, but outputs the group of non-terminal and terminal symbols
+the sequence of characters belongs to according to the C-Lite syntax.  
 
+The parser only implements a subset of the production rules in the official C-Lite syntax and those rules and the corresponding output for each are included in the image below:  
+![Subset of C-Lite rules implemented by program](screenshots/c_task_4_1.png)
+
+For each of the above production rules and corresponding outputs, a rule is included in the rules section of the flex source program that implements the production rule.  
+In addition to the above rules, the parser also ignores all single-line comments, multi-line comments, whitespace, and semicolons.  
+Comments were included above each rule in the flex source file to identify the specific function of each rule.
+
+The input text used to test the generated parser is stored in `clite_parser_test.c`, and it has the following content:  
+```
+int main() {
+  // this is a single-line comment
+  /* this is a multiline comment
+
+containing a /backslash/ */
+
+  int a = 6;
+  int b = 5.0;
+
+  if( a < b ) {
+    a = a + b;
+  }
+}
+```
 
 **Compile:**
 ```
+$ flex clite_parser.yy
+$ gcc -o clite_parser lex.yy.c -ll
 ```
 
-**Run:**  
-`$ ./task_4`
+**Run:** `$ ./clite_parser clite_parser_test.c`
 
 **Output:**  
-![Screenshot of C task 4](screenshots/c_task_4_1.png)  
+![Screenshot of C task 4](screenshots/c_task_4_2.png)  
 
 **Explanation:**  
+The output confirms that the parser program is able to correctly parse the above-specified subset of the C-Lite syntax and gives the expected output.
+All whitespace, comments, and semicolons in the input program are ignored and all tokens that match any of the production rules specified in the table above were correctly replaced with their expected output.
 
-
+## Part II: Selected Langauges
+The following is the link to the
 
 ## Extensions
 ### Extension 1
