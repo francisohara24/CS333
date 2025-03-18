@@ -3,3 +3,7 @@ cmake-build-debug
 /*.DS_Store
 /src/.DS_Store
 /src/project_2/.DS_Store
+/src/project_2/task_1/encode
+/src/project_2/task_2/vowel_counter
+/src/project_2/task_3/html_scanner
+/src/project_2/task_4/clite_parser
