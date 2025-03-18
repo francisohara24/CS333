@@ -36,56 +36,71 @@ C Compiler: Apple clang version 15.0.0 (clang-1500.1.0.2.5)
 ## Part I
 ### Task 1
 **Description:**  
-A flex-generated lexer that shifts each alphabetic character in an input string 13 spaces forward in the alphabet.  
-The matci
+A flex-generated lexer that shifts each alphabetic character in an input string 13 spaces forward in the alphabet, with 
+wraparound from z back to a.  
+The lexer uses two rules to achieve this, one for lowercase alphabets (pattern: `[a-z]`) and another for uppercase alphabets (pattern: `[A-Z]`).  
+In the flex rule for uppercase alphabets, the action of the rule shifts the matched character using the formula $(65 + ((matched\_character - 65 + 13)\,\%\,26))$.  
+In the flex rule for lowercase alphabets, the action of the rule shifts the matched character using a similar formula $97 + ((matched\_character - 97 + 13)\,\%\,26)$  
+The input text used to test the generated lexer is stored in `encode_test.txt` and it has the following content:
+```
+This is the unencoded text. Encoding this text will shift each alphabetic character 13 spaces down the alphabet.
+```
 
 **Compile:**  
 ```
-$ gcc -o task_1 task_1.c`  
-$ gc
+$ flex encode.yy
+$ gcc -o encode lex.yy.c -ll 
 ```
 
-**Run:** `$ ./task_1`
+**Run (encode):** `$ ./encode encode_test.txt`
+
+**Run (decode):** `$ ./encode encode_test.txt | ./encode`
 
 **Output:**  
 ![Screenshot of c task 1](screenshots/c_task_1_1.png)
 
-**Output:**  
-
 **Explanation:**  
-The 
+After running the lexer on the input file once, each alphabet in the input file is shifted 13 spaces forward.  
+For example, The letter 'T' is replaced with 'G', which is 13 spaces forward from 'T' considering the wraparound from 'z' to 'a'.  
+Additionally, running the lexer on the output of the first run reverts to the original as expected.
+
 
 
 ### Task 2
-**Compile:** `$ gcc -o task_2 task_2.c`
+**Description:**
+A flex-generated lexer that reads in a text file and outputs the number of rows, characters, and vowels contained in the text file.  
+The code works by initializing three integer variables (`num_rows`, `num_chars`, and `num_vars`) for storing the count of rows, characters, and vowels in the text whose values get output at the end of the program.  
+Three rules are used to determine when to increment each of the variables:  
+1. Upon matching the newline character `\n`, `num_rows` is incremented by 1 and `num_chars` is also incremented by 1 since a newline character counts as a character.
+2. Upon matching any vowel `[aeiouAEIOU]`, `num_vowels` is incremented by 1, `num_chars` is incremented by 1 since a vowel character counts as a character, and `num_rows` is also incremented by 1 if its current value is 0 since we want to be able to account for files that contain just one row that does not terminate with a newline character.
+3. Upon matching any non-newline character `.`, `num_chars` is incremented by 1 and `num_rows` is also incremented by 1 if its current value is 0 since we want to be able to account for files that contain just one row not terminated by a newline character.  
 
-**Run:** `$ ./task_2`
+The rules appear in the above-mentioned order exactly in the flex source program since we don't want the second rule matching vowels to be overshadowed by the rule matching characters.  
+The input text used to test the generated lexer is stored in `vowel_counter_test.txt`, and it has the following content:
+```
+Hello World. This is a test file for a simple flex program.
+Good bye Earth! 
+```
+It has **2 rows**, **75 characters** (including the newline separating row 1 from row 2), and **21 vowel characters**. 
+
+**Compile:**  
+```
+$ flex vowel_counter.yy
+$ gcc -o vowel_counter lex.yy.c -ll
+```
+
+**Run:**  `$ ./vowel_counter vowel_counter_test.txt`
 
 **Output:**  
 ![Screenshot of c task 2](screenshots/c_task_2_1.png)  
-![Screenshot of c task 2](screenshots/c_task_2_2.png)  
-![Screenshot of c task 2](screenshots/c_task_2_3.png)
 
-
-**Q.b.**  
-b.	The overall layout of the stack is such that variables declared on the stack are stored next to each other in consecutive memory locations from the most recently declared variable to the least recently declared variable in memory.  
-Variables declared in stack memory can be imagined as being stored in a stack data structure with the most recently declared variable at the top of the stack and the least recently declared variable at the bottom of the stack.  
-As a pointer pointing to any byte on the stack is incremented, we go down the stack.  
-The `ptr` variable for instance is the most recently declared variable and can be considered as being at the top of the stack.  
-And since pointers occupy 8 bytes in memory, the first 8 bytes printed represent the memory location of `ptr`.  
-The following 8 bytes are for the long declared right before `ptr`. The next 4 bytes are for the `int` and so on.
-
-
-**Q. c.**  
-c.	The non-zero values from index 24 do not make immediate sense. This is because index 24 is the last byte (MSB) of the first declared variable.  
-Hence, indexing beyond that implies accessing memory locations beyond the region in the stack in which memory was allocated for our declared variables.
-
-**Q. d.**  
-I can find the variables defined in the C program in the printed output. The first 8 indices correspond to the ptr variable.  
-The next 8 correspond to the long_integer variable, the next 4 correspond to the integer variable and so on.
-
+**Explanation:**  
+The screenshot above shows that the program correctly identifies that there are 2 rows, 75 characters, and 21 vowel characters in the input file `vowel_counter_test.txt`.
 
 ### Task 3
+**Description:**
+A flex-generated lexer for stripping an html file of tags, single-line comments, and extraneous whitespace.
+
 **Compile:** `$ gcc -o task_3 task_3.c`
 
 **Run:** `$ ./task_3`
