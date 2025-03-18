@@ -99,96 +99,77 @@ The screenshot above shows that the program correctly identifies that there are 
 
 ### Task 3
 **Description:**
-A flex-generated lexer for stripping an html file of tags, single-line comments, and extraneous whitespace.
+A flex-generated lexer for stripping an HTML file of tags, single-line comments, and extraneous whitespace.  
+The code specifically does the following things:
+ - Removes HTML tags (i.e. any sequence of characters beginning with `<` and ending with `>` with no angle brackets in between.)
+ - Removes any occurrence of a tab `\t` or single space ` `.
+ - Replaces any occurrence of more than one newline character `\n` in a row with a single newline character.
+ - Removes any occurrence of a single newline character `\n`.  
 
-**Compile:** `$ gcc -o task_3 task_3.c`
+The following flex rules were used in the exact order specified below to achieve the above outcomes:
+1. Upon matching the pattern `\<[^<>]+\>`, ignore it to remove single-line and multi-line HTML tags from the output.
+2. Upon matching the pattern `[ \t]+`, ignore it to remove all single spaces and tabs from the output.
+3. Upon matching the pattern `\n{2,}`, replace with a single newline character `\n` to replace all occurrences of more than one newline character in a row with a single newline.
+4. Upon matching the pattern `\n`, ignore it to remove all occurrences of single newline characters `\n` from the output.
 
-**Run:** `$ ./task_3`
+Two input texts were used to test the generated lexer both of which are stored in `html_scanner_test_1.txt` and `html_scanner_test_2.txt`.
+The following is the content of `html_scanner_test_1.txt`:  
+```
+<!DOCTYPE html>
+<html lang="en">
+		<head>
+				<title>This is a page title</title>
+		</head>
 
-**Output:**
-1. Without `free()` statement (17.14 GB memory usage):  
-   ![Screenshot of C task 3](screenshots/c_task_3_1.png)
+		<body>
+				<h3>Here is a header</h3>
 
-2. With `free()` statement (348 KB memory usage):  
-   ![Screenshot of C task 3](screenshots/c_task_3_2.png)
+				<p>
+						Here is some body text in a paragraph</p>
 
-**Q.b.**  
-Without the `free()` statement, the program requires significantly more memory over time (about 500 MB every few seconds).  
-But with the `free()` statement, the program requires a constant amount of memory over time (348 KB).
+				<p>
+						<a href="cs.colby.edu">Here is a link to cs.colby.edu</a>
+						inside a paragraph.
+				</p>
+
+				<!-- Here is a single line comment -->
+				<!-- Here is a multi-line
+					 comment -->
+		</body>
+</html>
+```
+
+**Compile:** 
+```
+$ flex html_scanner.yy
+$ gcc -o html_scanner lex.yy.c -ll
+```
+
+**Run:** `$ ./html_scanner html_scanner_test_1.txt`
+
+**Output:**  
+![Screenshot of C task 3](screenshots/c_task_3_1.png)
+
+**Explanation:**  
+The above output confirms that the generated lexer is able to remove all HTML tags, spaces, and tabs in addition to replacing all occurrences of more than one newline character in a row with a single newline character.
 
 
 ### Task 4
-**Compile:** `$ gcc -o task_4 task_4.c`
+**Description:**  
 
-**Run:** `$ ./task_4`
+
+**Compile:**
+```
+```
+
+**Run:**  
+`$ ./task_4`
 
 **Output:**  
 ![Screenshot of C task 4](screenshots/c_task_4_1.png)  
-![Screenshot of C task 4](screenshots/c_task_4_2.png)
 
-**Q.a.**  
-For this task, I created 3 different structs: `Structure1`(char, short, int), `Structure2` (char, int, short) and `Structure3`(char, long, int).  
-From this task I learned the following two rules about struct byte alignment and will use each struct to explain:
+**Explanation:**  
 
-    Rule 1: The size of the struct must be a multiple of the largest type among the members of the struct.  
-    Rule 2: Any member of the struct can only be placed at a memory address that is a multiple of the size of the member’s datatype.
-
-**Structure1**  
-`Structure1` consists of a `char`, followed by a `short`, and a `int` and the following is a drawing of how its instance’s contents were laid out in memory:  
-![Screenshot of C task 4](screenshots/c_task_4_3.png)
-*Figure 1. Memory layout of Structure1 instance. Each square is a byte of memory and the indices are memory addresses.  
-The instance members were assigned the values char `0xA1`, short `0xA1B2`, and int `A1B2C3D4`.*
-
-The char is assigned to memory address 0. However, although the next available memory address is 1, it is padded with 0s and the short is assigned to memory address 2 because from **rule 2**, each member of the struct can only be stored in an address that is a multiple of the size of the member’s type (2 bytes in the case of short).  
-The int is however stored in the next available memory address of 4 since the size of int is 4 bytes.  
-The size of the struct is 8 bytes even though the minimum number of bytes required to store all members of the struct is 7 bytes `(sizeof char + sizeof short + sizeof int)`, and this is because of rule 1 (total size of struct must be multiple of size of largest type in struct).
-
-**Structure2**  
-`Structure2` consists of a `char`, followed by an `int`, followed by a `short`.
-![Screenshot of C task 4](screenshots/c_task_4_4.jpg)
-*Figure 2. Memory layout of Structure2 instance. Each square is a byte of memory and the indices are memory addresses.
-The instance members were assigned the values char `0xA1`, int `A1B2C3D4`, and short `0xA1B2`.*
-
-The char is assigned to memory address 0. Here also, though the next available memory address is 1, the next member of the struct is an int and has to be stored in a memory address that is a multiple of 4 because of **rule 2**.   
-Hence, the int is stored in memory address 4 which is the next available multiple of 4.  
-Likewise, the short was stored in the next available memory address of 8 because memory address 8 is the next multiple of 2 (size of short).  
-But even after all members of the struct are stored, it is padded with 2 bytes of 0s so that it’s total size is 12 bytes.  
-This was done because of **rule 1** (total size of struct must be a multiple of size of largest type in struct).  
-Since the largest type in Structure2 is int, the 2 bytes padded at the end are there to ensure that the total size of the struct is a multiple of 4.
-
-**Structure3**  
-`Structure3` consists of a `char`, followed by a `long`, followed by an `int`.  
-![Screenshot of C task 4](screenshots/c_task_4_5.jpg)
-*Figure 3. Memory layout of Structure3 instance. Each box represents a byte of memory and the indices are memory addresses.
-The instance members were assigned the values char `0xA1`, long `0xA1B2C3D4E5F6A7B8`, and int `A1B2C3D4`.*
-
-The char is assigned to memory address 0. The long is, however, assigned to memory address 8 since that is the next available memory address that is a multiple of 8 (size of long) and all empty bytes before it are padded with 0s.  
-The int is then assigned to memory address 8 since that is the next available address that is a multiple of 4 (size of int).  
-The next 4 bytes are padded with 0s so that the total size of the struct is a multiple of the size of the largest member of the struct (long) and this is why the total size of the struct is 24 bytes instead of the minimum required 13 bytes `(sizeof char + sizeof long + sizeof int)`.
-
-**Q.b.**
-Yes, there are gaps, and they are because of the aforementioned struct byte alignment rules.
-
-### Task 5
-**Compile:** `$ gcc -o task_5 task_5.c`
-
-**Run:** `$ ./task_5`
-
-**Output:**  
-![Screenshot of C task 5](screenshots/c_task_5_1.png)
-
-**Q.a.**  
-The string I found that doesn’t work is “AAAAAAAAAAAAA” (13 As) which yielded a positive bank balance of 65.
-
-**Q.b.**  
-Screenshot included above.
-
-**Q.c.**  
-Despite being initialized to 0, the bank balance increases to a positive value because its contents are overwritten when `scanf()` receives bad input (i.e. a buffer overflow occurs).  
-The `Account` struct instance is laid out in memory such that the first 10 bytes (byte 0-9) are meant to contain the contents of the string member `name[10]`.   
-The next two bytes (byte 10-11) are padded with 0s due to the struct byte alignment rules. Finally, the next 4 bytes (byte 12-15) store the contents of the integer bank balance.  
-Therefore, if any input string is entered consisting of 13 or more characters whose ASCII values are not 0, the 13th character and over will end up getting written to bytes 12 – 15 which are the bytes containing the value of integer bank balance, thus resulting in a non-zero bank balance.  
-Although entering only 12 characters is enough to cause a buffer overflow since the 12 characters will occupy bytes 0-11 and the null terminator ‘\0’ will occupy byte 12 (the first byte of the integer bank balance), the null terminator character is equivalent to the value 0 and will therefore have no effect on the first byte of the bank balance which has already been set to 0 at the start of the program.
 
 
 ## Extensions
