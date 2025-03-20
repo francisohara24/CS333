@@ -199,40 +199,57 @@ $ gcc -o clite_parser lex.yy.c -ll
 The output confirms that the parser program is able to correctly parse the above-specified subset of the C-Lite syntax and gives the expected output.
 All whitespace, comments, and semicolons in the input program are ignored and all tokens that match any of the production rules specified in the table above were correctly replaced with their expected output.
 
-## Part II: Selected Langauges
-The following is the link to the
+## Part II: Selected Languages
+### Task 1
+The following is the link to my organized Google Sites homepage for CS333:  
+*[https://sites.google.com/colby.edu/francis-ohara-cs333/home/](https://sites.google.com/colby.edu/francis-ohara-cs333/home/)*  
+
+It contains a section for each language with a link to each project page.
+
+### Task 2
+I created a subpage for each selected language in project 2 and the following are the links to each subpage:
+ - **JavaScript:** *[https://sites.google.com/colby.edu/francis-ohara-cs333/home/project-2-js](https://sites.google.com/colby.edu/francis-ohara-cs333/home/project-2-js)*
+ - **Go:** *[https://sites.google.com/colby.edu/francis-ohara-cs333/home/project-2-go](https://sites.google.com/colby.edu/francis-ohara-cs333/home/project-2-go)*
+
+### Task 3
+I searched for useful resources, documentation, and formal descriptions of each of the above-selected languages and included them in the first section of their respective subpages.
+
+### Task 4 --JavaScript
+For my JavaScript "hello world" program, I wrote a program that prints out the current date and time and additionally prints whether the current year is a leap year.  
+The filename of the program is `task_4.js`, and it can be executed using the Node.js runtime environment.  
+Instructions for installing the Node.js runtime environment can be found on the official Node.js website: *[https://nodejs.org/en/download](https://nodejs.org/en/download)*  
+
+**Run:** `node task_4.js`
+
+**Output:**  
+![Screenshot of JavaScript task 4](screenshots/js_task_4_1.png)
+
+### Task 4 --Go
+For my Go 'Hello World' program, I decided to write a program that imports a Go package stored in a remote repository (rsc.io/quote) with functions that return various proverbial sayings and prints some of the sayings.  
+The official instructions for installing Go are available here: https://go.dev/doc/install  
+`rsc.io/quote`'s documentation is also available here: https://pkg.go.dev/rsc.io/quote/v4
+
+**Run:**
+```
+$ go mod tidy
+$ go run .
+```
+
+**Output:**
+![Screenshot of Go task 4](screenshots/go_task_4_1.png)
 
 ## Extensions
 ### Extension 1
 **Description**  
-For this extension, I decided to make task 5 in part I more robust so that the inputs won't impact the initial balance.
-To achieve this, I simply changed the order of declaration of the struct members so that integer bank balance is declared first and the name of the account is declared afterwards.  
-As a result, a buffer overflow of the input name will not overwrite the bytes of the integer bank balance since the bank balance will be stored before the account name in memory.
-
-
-**Compile:** `$ gcc -o extension_1 extension_1.c`
-
-**Run:** `$ ./extension_1`
-
-**Output:**  
-![Screenshot of C extension 1](screenshots/c_extension_1_1.png)
-
+I decide to allow comments to work properly in my parser for HTML.
+The compile and run instructions as well as the program's outcome are same as that of C task 3.
 
 ### Extension 2
 **Description**  
-For this extension, I wrote a simple C program that generates a segmentation fault runtime error.  
-It does so by creating and attempting to deference a pointer that points to an illegal memory address.
-
-**Compile:** `$ gcc -o extension_2 extension_2.c`
-
-**Run:** `$ ./extension_2`
-
-**Output:**  
-![Screenshot of C extension 2](screenshots/c_extension_2_1.png)
-
+For this extension, I decided to get comments to work properly in my parser for C-Lite.
+The compile and run instructions as well as the program's outcome are same as that of C task 4.
 
 ### Extension 3
 **Description**  
-For this extension, I decided to research a fifth programming language (C#) and included my findings in my Google Site report for project 1.
-
-**Link:** The link to the specific section of my report in which I elaborate on my findings is [available here](https://sites.google.com/colby.edu/francis-ohara-cs333/home/project-1?authuser=1#h.7acaol1l6nrv).
+For this extension, I decided to implement an additional selected language part aside JavaScript.  
+I chose to implement the hello world program in the Go programming language and found various learning resources online for learning Go which I put on the project report page.
