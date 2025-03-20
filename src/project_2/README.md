@@ -7,26 +7,42 @@
 ## Directory Layout:
 ```
 Project2_fohara27
+    ├── C
+    │   ├── task_1
+    │   │   ├── encode.yy
+    │   │   ├── encode_test.txt
+    │   │   └── lex.yy.c
+    │   ├── task_2
+    │   │   ├── lex.yy.c
+    │   │   ├── vowel_counter.yy
+    │   │   └── vowel_counter_test.txt
+    │   ├── task_3
+    │   │   ├── html_scanner.yy
+    │   │   ├── html_scanner_test_1.txt
+    │   │   ├── html_scanner_test_2.txt
+    │   │   ├── lex.yy.c
+    │   │   └── output.txt
+    │   └── task_4
+    │       ├── clite_parser.yy
+    │       ├── clite_parser_test.c
+    │       ├── lex.yy.c
+    │       └── output.txt
+    ├── Go
+    │   ├── go.mod
+    │   ├── go.sum
+    │   └── task_4.go
+    ├── JS
+    │   └── task_4.js
     ├── README.md
-    ├── task_1
-    │   ├── encode.yy
-    │   ├── encode_test.txt
-    │   └── lex.yy.c
-    ├── task_2
-    │   ├── lex.yy.c
-    │   ├── vowel_counter.yy
-    │   └── vowel_counter_test.txt
-    ├── task_3
-    │   ├── html_parser.yy
-    │   ├── html_parser_test_1.txt
-    │   ├── html_parser_test_2.txt
-    │   ├── lex.yy.c
-    │   └── output.txt
-    └── task_4
-        ├── clite_parser.yy
-        ├── clite_parser_test.c
-        ├── lex.yy.c
-        └── output.txt
+    └── screenshots
+        ├── c_task_1_1.png
+        ├── c_task_2_1.png
+        ├── c_task_3_1.png
+        ├── c_task_4_1.png
+        ├── c_task_4_2.png
+        ├── go_task_4_1.png
+        └── js_task_4_1.png
+
 ```
 ## OS and C compiler
 OS: macOS Ventura 13.7.4  
@@ -229,10 +245,9 @@ For my Go 'Hello World' program, I decided to write a program that imports a Go 
 The official instructions for installing Go are available here: https://go.dev/doc/install  
 `rsc.io/quote`'s documentation is also available here: https://pkg.go.dev/rsc.io/quote/v4
 
-**Run:**
+**Run:**  
 ```
-$ go mod tidy
-$ go run .
+$ go run task_4.go 
 ```
 
 **Output:**
