@@ -68,6 +68,7 @@ void stk_display(Stack *stack, int order) {
         int *ptr = stack->top - 1;
         while (ptr != stack->data - 1) {
             printf("%d ", *ptr);
+            ptr--;
         }
     }
     printf("\n");
