@@ -39,7 +39,7 @@ void stk_push(Stack *stack, int value) {
 
 int stk_peek(Stack *stack) {
     if (!stk_empty(stack)) {
-        return *(stack->top);
+        return *(stack->top - 1);
     }
     printf("Warning: attempting to peek an empty stack.\n");
     return 0;
@@ -48,7 +48,7 @@ int stk_peek(Stack *stack) {
 
 int stk_pop(Stack *stack) {
     if (!stk_empty(stack)) {
-        int value = *(stack->top);
+        int value = *(stack->top - 1);
         stack->top--;
         return value;
     }
@@ -76,7 +76,6 @@ void stk_display(Stack *stack, int order) {
 
 void stk_destroy(Stack *stack) {
     free(stack->data);
-    free(stack->top);
     free(stack);
 }
 
