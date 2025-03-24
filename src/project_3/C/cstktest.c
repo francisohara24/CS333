@@ -195,11 +195,11 @@ int main(int argc, char **argv) {
      * open your task manager (Windows) or Activity Monitor (Mac) and observe
      * that your memory usage doesn't increase while the program runs.
      */
-    // while(1)
-    // {
-    // 	Stack* stack = stk_create(10);
-    // 	for(int i = 0; i < 10; i++) stk_push(stack, i);
-    // 	// comment out the line below and watch your memory usage explode!
-    // 	stk_destroy(stack);
-    // }
+     while(1)
+     {
+     	Stack* stack = stk_create(10);
+     	for(int i = 0; i < 10; i++) stk_push(stack, i);
+     	// comment out the line below and watch your memory usage explode!
+     	stk_destroy(stack);
+     }
 }
