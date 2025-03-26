@@ -50,7 +50,6 @@ char *intToString(void *x) {
 }
 
 char *account_toString(void *v) {
-    // TODO: in CS333 cstk2: account for trailing comma of last item on stack.
     Account account = *((Account *) v);
     int result_length = 0;
     char *name_ptr = account.name;
