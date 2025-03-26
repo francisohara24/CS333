@@ -58,9 +58,12 @@ char *intToString(void *x) {
 }
 
 char *account_toString(void *v) {
+    Account account = *((Account *) v);
+
     // number of bytes to be allocated for result string
     int result_length = 0;
-    Account account = *((Account *) v);
+
+    // add bytes for account name
     char *name_ptr = account.name;
 
     while (*name_ptr != '\0') {
@@ -68,6 +71,7 @@ char *account_toString(void *v) {
         name_ptr++;
     }
 
+    // add bytes for string account balance
     char *balance = (char *) intToString(&account.balance);
     char *balance_ptr = balance;
 
@@ -76,28 +80,36 @@ char *account_toString(void *v) {
         balance_ptr++;
     }
 
+    // add bytes for ':' and ' ' separator characters and null terminator
     result_length += 3;
 
+    // allocate bytes and populate with characters
     char *result = (char *) malloc(result_length);
     char *result_ptr = result;
 
+    // append characters for account name
     name_ptr = account.name;
     while (*name_ptr != '\0') {
         *result_ptr = *name_ptr;
         name_ptr++;
         result_ptr++;
     }
+
+    // append separator characters
     *result_ptr = ':';
     result_ptr++;
     *result_ptr = ' ';
     result_ptr++;
 
+    // append characters for account balance
     balance_ptr = balance;
     while (*balance_ptr != '\0') {
         *result_ptr = *balance_ptr;
         balance_ptr++;
         result_ptr++;
     }
+
+    // append null terminator
     *result_ptr = '\0';
 
     free(balance);
