@@ -90,8 +90,10 @@ char *stk_toString(Stack *stack, char *(*toString)(void *)) {
     // add bytes for string representation of each item on the stack
     void **data_ptr = stack->data;
     while (data_ptr != stack->top) {
-        allocation_size += len(toString(*data_ptr));
+        char *string = toString(*data_ptr);
+        allocation_size += len(string);
         data_ptr++;
+        free(string);
     }
 
     // add bytes for opening and closing square brackets
@@ -122,6 +124,7 @@ char *stk_toString(Stack *stack, char *(*toString)(void *)) {
             string_ptr++;
             result_ptr++;
         }
+        free(string);
 
         // append separator characters if current item is not last item
         if ((data_ptr + 1) != stack->top) {
