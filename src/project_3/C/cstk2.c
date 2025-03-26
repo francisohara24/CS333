@@ -84,35 +84,38 @@ int len(char *string) {
 }
 
 char *stk_toString(Stack *stack, char *(*toString)(void *)) {
+    // number of bytes to be allocated for result string
     int allocation_size = 0;
 
-    // bytes to be allocated for string representation of each element
-    void **ptr = stack->data;
-    while (ptr != stack->top) {
-        allocation_size += len(toString(*ptr));
-        ptr++;
+    // add bytes for string representation of each item on the stack
+    void **data_ptr = stack->data;
+    while (data_ptr != stack->top) {
+        allocation_size += len(toString(*data_ptr));
+        data_ptr++;
     }
 
-    // bytes to be allocated for opening and closing square brackets
+    // add bytes for opening and closing square brackets
     allocation_size += 2;
 
-    // bytes to be allocated for separator characters ", "
+    // add bytes for separator characters ", "
     allocation_size += 2 * (stk_size(stack) - 1);
 
-    // byte to be allocated for null terminator of final string
+    // add bytes for null terminator of final string
     allocation_size += 1;
 
     // allocate bytes and populate with characters
     char *result = (char *) malloc(allocation_size);
 
-    ptr = stack->data;
+    data_ptr = stack->data;
     char *result_ptr = result;
 
+    // append opening square bracket
     *result_ptr = '[';
     result_ptr++;
 
-    while (ptr != stack->top) {
-        char *string = toString(*ptr);
+    while (data_ptr != stack->top) {
+        // append string representation of current item on the stack
+        char *string = toString(*data_ptr);
         char *string_ptr = string;
         while (*string_ptr != '\0') {
             *result_ptr = *string_ptr;
@@ -120,19 +123,22 @@ char *stk_toString(Stack *stack, char *(*toString)(void *)) {
             result_ptr++;
         }
 
-        if ((ptr + 1) != stack->top) {
+        // append separator characters if current item is not last item
+        if ((data_ptr + 1) != stack->top) {
             *result_ptr = ',';
             result_ptr++;
             *result_ptr = ' ';
             result_ptr++;
         } else {
+            // append closing square bracket if current item is last
             *result_ptr = ']';
             result_ptr++;
         }
 
-        ptr++;
+        data_ptr++;
     }
 
+    // append null terminator
     *result_ptr = '\0';
 
     return result;
