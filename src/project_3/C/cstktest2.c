@@ -14,9 +14,13 @@ typedef struct Account {
 } Account;
 
 char *intToString(void *x) {
+    // number to be converted
     int number = *((int *) x);
+
+    // number of digits in number
     int num_digits = 0;
 
+    // count number of digits
     if (number == 0) {
         num_digits ++;
     }
@@ -29,19 +33,23 @@ char *intToString(void *x) {
         num_digits++;
     }
 
+    // allocate bytes for representing number of digits, null terminator, and minus sign in result string.
     char *result = (char *) malloc(num_digits + 2);
     char *result_ptr = result;
     number = *((int *) x);
 
+    // append minus sign to result string if number is negative
     if (number < 0) {
         *result = '-';
         number *= -1;
         result_ptr++;
     }
 
+    // map for converting single-digit number to corresponding character
     char digit_to_char[10] = "0123456789";
 
     for (int i = 0; i < num_digits; i++) {
+        // append character representation of last digit of number to appropriate position in result string
         int digit = number % 10;
         result_ptr[num_digits - 1 - i] = digit_to_char[digit];
         number = number / 10;
@@ -50,8 +58,9 @@ char *intToString(void *x) {
 }
 
 char *account_toString(void *v) {
-    Account account = *((Account *) v);
+    // number of bytes to be allocated for result string
     int result_length = 0;
+    Account account = *((Account *) v);
     char *name_ptr = account.name;
 
     while (*name_ptr != '\0') {
