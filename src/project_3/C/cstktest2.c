@@ -5,6 +5,7 @@
  *
  * Exercises the functionality of cstk 
  * Modified by Ying Li 08/22/24
+ * Modified by Francis O'Hara 03/25/2025
  */
 #include "cstk2.h"
 
@@ -22,9 +23,8 @@ char *intToString(void *x) {
 
     // count number of digits
     if (number == 0) {
-        num_digits ++;
-    }
-    else if (number < 0) {
+        num_digits++;
+    } else if (number < 0) {
         number *= -1;
     }
 
@@ -256,18 +256,18 @@ int main(int argc, char **argv) {
      * In this second version, it will also test if you have avoided memory
      * leaks in your toString method(s).
      */
-    // while (1) {
-    //     int cap = 100;
-    //     Stack *stack = stk_create(cap);
-    //     int *ints = (int *)malloc(sizeof(int) * cap);
-    //     for (int i = 0; i < cap; i++) {
-    //         *(ints + i) = 0x7FFF0000 + i;
-    //         stk_push(stack, ints + i);
-    //     }
-    //     char *toString = stk_toString(stack, &intToString);
-    //     // comment out the line(s) below and watch your memory usage explode!
-    //     free(toString);
-    //     stk_destroy(stack);
-    //     free(ints);
-    // }
+    while (1) {
+        int cap = 100;
+        Stack *stack = stk_create(cap);
+        int *ints = (int *) malloc(sizeof(int) * cap);
+        for (int i = 0; i < cap; i++) {
+            *(ints + i) = 0x7FFF0000 + i;
+            stk_push(stack, ints + i);
+        }
+        char *toString = stk_toString(stack, &intToString);
+        // comment out the line(s) below and watch your memory usage explode!
+        free(toString);
+        stk_destroy(stack);
+        free(ints);
+    }
 }
