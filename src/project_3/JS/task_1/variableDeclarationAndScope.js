@@ -1,0 +1,1 @@
+// const variable without initializer is not allowed.
