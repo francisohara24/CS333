@@ -14,10 +14,13 @@ class ClassIdentifier {
 let foo = {objectPropertyIdentifier: 42};
 
 
+
 /** RULE: Reserved words generally can't be used as identifiers in JavaScript.
  * The commented line of code will produce a syntax error if uncommented.
  */
 // let if = 42;
+
+
 
 /** RULE: Reserved words may be used as identifiers for properties of objects and properties of classes.
  */
@@ -29,6 +32,8 @@ class Foo {
     if = 42;    // public class property
     #else = hello;      // private class property
 }
+
+
 
 /**
  *  RULE: A keyword that is not a reserved word may be used as an identifier anywhere in a JavaScript program.
@@ -43,11 +48,14 @@ async function bar() {
     console.log("Hello, World!");
 }
 
+
+
 /**
  * RULE: The starting character of an identifier cannot be a number.
  *       The commented line of code below will produce a syntax error if uncommented.
  */
 // let 3identifier = 42;
+
 
 
 /**
@@ -57,17 +65,21 @@ async function bar() {
  */
 let ቍቐቖቘቚ = "hello";
 
+
+
 /**
  * RULE: The starting character in an identifier must either be a dollar sign $, an underscore _, or a character in the
  *      ID_Start category of the Unicode character set.
  *      The following are 2 examples of identifiers with valid starting characters followed by 2 examples of an identifier
  *      with an invalid starting character.
  */
-let $hello = "hello, world!";
-let _bar = 42;
-let ⶸoo = 80.9;
+let $foo = "hello, world!";
+let _foo = 42;
+let ⶸfoo = 80.9;
 // let #invalid1= "Invalid!";
 // let %invalid2 = true;
+
+
 
 /**
  * RULE: A continuing character of an identifier must either be a character in the ID_Continue category of the Unicode
@@ -76,7 +88,9 @@ let ⶸoo = 80.9;
 let A𐁐ﶒl𐱈;
 let A\u200C\u200D;
 
-/** RULE: Unicode escape sequences may be used as characters in an identifier in place of the actual unicode symbol.
+
+
+/** RULE: Unicode escape sequences may be used as characters in an identifier in place of the actual Unicode symbol.
  *       The identifier `\u0041\u0042` is equivalent to `AB`.
  */
 const \u0041\u0042 = "foobar";
