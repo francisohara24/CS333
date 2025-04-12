@@ -17,11 +17,11 @@ function binarySearch(arr, target) {
     let start = 0;
     let end = arr.length - 1;
     let middle = Math.trunc((start + end) / 2);
-    let target_index = -1;
+    let targetIndex = -1;
 
     while (start <= end) {
         if (arr[middle] === target) {
-            target_index = middle;
+            targetIndex = middle;
             break;
         }
         if (arr[middle] > target) {
@@ -32,7 +32,7 @@ function binarySearch(arr, target) {
         middle = Math.trunc((start + end) / 2);
     }
 
-    return target_index;
+    return targetIndex;
 }
 
 
