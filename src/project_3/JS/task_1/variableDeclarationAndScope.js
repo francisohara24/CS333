@@ -203,3 +203,25 @@ function func8(){
     const constVariable1 = 43;
 }
 func8();
+
+
+
+/**
+ * RULE: It is possible to declare a variable without using the `let`, `var`, or `const` keyword, and this results in the variable receiving a global scope
+ *      regardless of whether it was defined within a function or other block.
+ *      - This practice is not recommended as it is error-prone.
+ */
+function func9(){
+    /** Legal declaration of global variable in function scope by omitting `var`, `let`, and `const` keyword. */
+    globalVariable = "I am a global variable!";
+
+    if (true){
+        /** Legal definition of global variable in if-block-scope by omitting `var`, `let`, and `const` keyword. */
+        globalVariable2 = 42;
+    }
+}
+func9();
+
+/** Legal access of global variable despite definition in function scope. */
+console.log("globalVariable: " + globalVariable)        // "I am a global variable!"
+console.log("globalVariable2: ", globalVariable2)       // 42
