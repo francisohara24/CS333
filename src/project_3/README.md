@@ -1,40 +1,55 @@
 # CS333 - Project 3 - README
 ### Francis O'Hara
-### 03/21/2025
+### 04/14/2025
 
 ***Google Sites Report: [https://sites.google.com/colby.edu/francis-ohara-cs333/home/](https://sites.google.com/colby.edu/francis-ohara-cs333/home/)***
 
 ## Directory Layout:
 ```
-Project1_fohara27
-    ├── README.md
-    ├── extension_1.c
-    ├── extension_2.c
-    ├── screenshots
-    │   ├── c_extension_1_1.png
-    │   ├── c_extension_2_1.png
-    │   ├── c_task_1_1.png
-    │   ├── c_task_2_1.png
-    │   ├── c_task_2_2.png
-    │   ├── c_task_2_3.png
-    │   ├── c_task_3_1.png
-    │   ├── c_task_3_2.png
-    │   ├── c_task_4_1.png
-    │   ├── c_task_4_2.png
-    │   ├── c_task_4_3.png
-    │   ├── c_task_4_4.jpg
-    │   ├── c_task_4_5.jpg
-    │   └── c_task_5_1.png
-    ├── task_1.c
-    ├── task_2.c
-    ├── task_3.c
-    ├── task_4.c
-    └── task_5.c
-
+Project3_fohara27
+	├── C
+	│   ├── cstk.c
+	│   ├── cstk.h
+	│   ├── cstk2.c
+	│   ├── cstk2.h
+	│   ├── cstktest.c
+	│   ├── cstktest2.c
+	│   ├── toDraw.c
+	│   └── toDraw2.c
+	├── JS
+	│   ├── task_1
+	│   │   ├── identifierRules.js
+	│   │   └── variableDeclarationAndScope.js
+	│   ├── task_2.js
+	│   ├── task_3.js
+	│   ├── task_4.js
+	│   └── task_5.js
+	├── README.md
+	└── screenshots
+		├── c_task_3_1.png
+		├── c_task_4_1.mov
+		├── c_task_4_2.png
+		├── c_task_5_1.png
+		├── c_task_5_2.png
+		├── c_task_6_1.mov
+		├── c_task_6_2.png
+		├── c_task_6_3.png
+		├── js_task_1_1.png
+		├── js_task_1_2.png
+		├── js_task_1_3.png
+		├── js_task_1_4.png
+		├── js_task_2_1.png
+		├── js_task_2_2.png
+		├── js_task_3_1.png
+		├── js_task_3_2.png
+		├── js_task_4_1.png
+		├── js_task_4_2.png
+		├── js_task_5_1.png
+		└── js_task_5_2.png
 ```
 ## OS and C compiler
-OS: macOS Ventura 13.7.4  
-C Compiler: Apple clang version 15.0.0 (clang-1500.1.0.2.5)
+OS: macOS Sequoia 15.4  
+C Compiler: Apple clang version 17.0.0 (clang-1700.0.13.3)
 
 
 ## Part I
@@ -125,39 +140,84 @@ The following is my memory diagram at Mark 1 of [toDraw2.c](C/toDraw2.c):
 
 
 ## Part II: Selected Languages
+For this project, I implemented my selected language tasks using JavaScript.  
+The code must be executed using the Node.js runtime environment.  
+Instructions for installing the Node.js runtime environment can be found on the official Node.js website: *[https://nodejs.org/en/download](https://nodejs.org/en/download)*
+
 ### Task 1
+I split this task into two separate scripts, [identiferRules.js](JS/task_1/identifierRules.js) and [variableDeclarationAndScope.js](JS/task_1/variableDeclarationAndScope.js) both of which can be found in the [JS/task_1](JS/task_1) directory.  
 
-## Extensions
-### Extension 1
-**Description**  
-For this extension, I decided to make task 5 in part I more robust so that the inputs won't impact the initial balance.
-To achieve this, I simply changed the order of declaration of the struct members so that integer bank balance is declared first and the name of the account is declared afterwards.  
-As a result, a buffer overflow of the input name will not overwrite the bytes of the integer bank balance since the bank balance will be stored before the account name in memory.
+**IdentifierRules.js**  
+[identiferRules.js](JS/task_1/identifierRules.js) contains code for demonstrating various identifier naming rules in JavaScript.  
 
+**Code Preview:**  
+![Screenshot of identifierRules.js](screenshots/js_task_1_1.png)
 
-**Compile:** `$ gcc -o extension_1 extension_1.c`
+**Run:** `$ node identifierRules.js`
 
-**Run:** `$ ./extension_1`
+**Output Preview:**
+![Screenshot of identifierRules.js Output](screenshots/js_task_1_2.png)
 
-**Output:**  
-![Screenshot of C extension 1](screenshots/c_extension_1_1.png)
+**variableDeclarationAndScope.js**  
+[variableDeclarationAndScope.js](JS/task_1/variableDeclarationAndScope.js) contains code for demonstrating variable declaration and scoping rules in JavaScript.  
 
+**Code Preview:**  
+![Screenshot of variableDeclarationAndScope.js](screenshots/js_task_1_3.png)
 
-### Extension 2
-**Description**  
-For this extension, I wrote a simple C program that generates a segmentation fault runtime error.  
-It does so by creating and attempting to deference a pointer that points to an illegal memory address.
+**Run:**  `$ node variableDeclarationAndScope.js`
 
-**Compile:** `$ gcc -o extension_2 extension_2.c`
-
-**Run:** `$ ./extension_2`
-
-**Output:**  
-![Screenshot of C extension 2](screenshots/c_extension_2_1.png)
+**Output Preview:**  
+![Screenshot of variableDeclarationAndScope.js Output](screenshots/js_task_1_4.png)
 
 
-### Extension 3
-**Description**  
-For this extension, I decided to research a fifth programming language (C#) and included my findings in my Google Site report for project 1.  
+### Task 2
+In this task, I implemented the binary search algorithm for finding a target value from a sorted array.  
+The code I wrote for this task is contained in the [task_2.js](JS/task_2.js) file of the [JS](JS) directory.  
 
-**Link:** The link to the specific section of my report in which I elaborate on my findings is [available here](https://sites.google.com/colby.edu/francis-ohara-cs333/home/project-1?authuser=1#h.7acaol1l6nrv).
+**Code Preview:**  
+![Screenshot of task_2.js](screenshots/js_task_1_3.png)
+
+**Run:**  `$ node task_2.js`
+
+**Output Preview:**  
+![Screenshot of task_2.js Output](screenshots/js_task_2_2.png)
+
+
+## Task 3
+In this task, I wrote a program to demonstrate the type system in JavaScript including all the available primitive types and the operations they support.  
+I also demonstrate how aggregate types are constructed using Objects and Arrays.  
+The code I wrote for this task is contained in the [task_3.js](JS/task_3.js) file of the [JS](JS) directory.
+
+**Code Preview:**  
+![Screenshot of task_3.js](screenshots/js_task_3_1.png)
+
+**Run:**  `$ node task_3.js`
+
+**Output Preview:**  
+![Screenshot of task_3.js Output](screenshots/js_task_3_2.png)
+
+
+## Task 4 
+In this task, I wrote a JavaScript program to demonstrate the various control flow statements available in JavaScript including if...else statements, switch statements, loops, and try...catch statements among others.  
+The code I wrote for this task is contained in the [task_4.js](JS/task_4.js) file of the [JS](JS) directory.
+
+**Code Preview:**  
+![Screenshot of task_4.js](screenshots/js_task_4_1.png)
+
+**Run:**  `$ node task_4.js`
+
+**Output Preview:**  
+![Screenshot of task_4.js Output](screenshots/js_task_4_2.png)
+
+
+## Task 5
+In this task, I wrote a JavaScript program to demonstrate the functional aspects of JavaScript including first-class functions, higher-order functions, and lambda/anonymous functions. 
+The code I wrote for this task is contained in the [task_5.js](JS/task_5.js) file of the [JS](JS) directory.
+
+**Code Preview:**  
+![Screenshot of task_5.js](screenshots/js_task_5_1.png)
+
+**Run:**  `$ node task_5.js`
+
+**Output Preview:**  
+![Screenshot of task_5.js Output](screenshots/js_task_5_2.png)
