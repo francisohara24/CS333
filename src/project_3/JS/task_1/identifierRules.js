@@ -1,3 +1,9 @@
+/**
+ * @file   identifierRules.js
+ * @brief  Program to demonstrate identifier naming rules in JavaScript.
+ * @author Francis O'Hara
+ * @date   4/12/25
+ */
 /** RULE: Identifiers can be assigned to variables, constants, functions, classes, properties of objects or properties of classes. */
 let variableIdentifier;
 
@@ -70,7 +76,7 @@ let ቍቐቖቘቚ = "hello";
 /**
  * RULE: The starting character in an identifier must either be a dollar sign $, an underscore _, or a character in the
  *      ID_Start category of the Unicode character set.
- *      The following are 2 examples of identifiers with valid starting characters followed by 2 examples of an identifier
+ *      The following are 3 examples of identifiers with valid starting characters followed by 2 examples of an identifier
  *      with an invalid starting character.
  */
 let $foo = "hello, world!";
@@ -94,4 +100,4 @@ let A\u200C\u200D;
  *       The identifier `\u0041\u0042` is equivalent to `AB`.
  */
 const \u0041\u0042 = "foobar";
-console.log(AB);
+console.log(AB);    // Output: foobar
