@@ -1,3 +1,9 @@
+/**
+ * @file   variableDeclarationAndScope.js
+ * @brief  Program to variable declaration and scoping rules in JavaScript.
+ * @author Francis O'Hara
+ * @date   4/12/25
+ */
 /** RULE: Variables may be declared using either the `var`, `let`, or `const` keyword. */
 var foo;
 let bar;
@@ -17,7 +23,7 @@ function func1() {
     }
 
     /** Legal access of function-scoped `var` variable outside nested if block but within function scope. */
-    console.log("functionScopedVarVariable: " + functionScopedVarVariable);     // 42
+    console.log("functionScopedVarVariable: " + functionScopedVarVariable);     // Output: 42
 }
 func1();
 
@@ -35,14 +41,14 @@ function func2(){
          * scoped variable declared above and will overwrite its value.
          * */
         var functionScopedVarVariable = 43;
-        console.log(functionScopedVarVariable);         // 43
+        console.log(functionScopedVarVariable);         // Output: 43
     }
 
     /** Legal access of function-scoped var variable.
      *  Value of function-scoped `var` variable changes from `42` to `43` because the redeclared `var` variable in nested if-block
      *  is also function scoped and overwrites previous value of `functionScopedVarVariable`.
      *  */
-    console.log("functionScopedVarVariable: " + functionScopedVarVariable);
+    console.log("functionScopedVarVariable: " + functionScopedVarVariable);     // Output: 43
 
 }
 func2();
@@ -58,10 +64,11 @@ function func3() {
     if (true){
         /** Declaration of if-block-scoped `let` variable */
         let letVariable = 42;
+        console.log("letVariable: " + letVariable);     // Output: 42
     }
 
     /** Illegal access of if-block-scoped `let` variable outside if-block scope. */
-    // console.log("letVariable: " + letVariable);
+    // console.log("letVariable: " + letVariable);     // ReferenceError
 }
 func3();
 
@@ -69,6 +76,7 @@ func3();
 function func4() {
     /** declaration of function-scoped letVariable. */
     let letVariable = 42;
+    console.log("letVariable: " + letVariable);       // Output: 42
 
     if (true) {
         /**
@@ -76,13 +84,13 @@ function func4() {
          * This will declare a new if-block-scoped letVariable that temporarily overshadows the function-scoped letVariable declared above.
          */
         let letVariable = 43;
-        console.log("letVariable: " + letVariable);       // 43
+        console.log("letVariable: " + letVariable);       // Output: 43
     }
 
     /** Legal access of function-scoped letVariable.
      *  Value of function-scoped letVariable has not changed since it is distinct from the if-block-scoped letVariable.
      */
-    console.log("letVariable: " + letVariable);       // 42
+    console.log("letVariable: " + letVariable);       // Output: 42
 }
 func4();
 
@@ -112,7 +120,7 @@ function func5(){
     if (true) {
         /** Declaration of if-block-scoped const variable */
         const blockScopedConstVariable = 42;
-        console.log("blockScopedConstVariable: " + blockScopedConstVariable);
+        console.log("blockScopedConstVariable: " + blockScopedConstVariable);       // Output: 42
     }
 
     /** Illegal access of if-block-scoped `const` variable outside if block. */
@@ -128,22 +136,22 @@ func5();
  */
 /** legal redeclaration of var variable */
 var sameScopedVarVariable = 42;
-var sameScopedVarVariable = 43;
+var sameScopedVarVariable = 43;     // No SyntaxError
 
 /** Illegal redeclaration of let variable */
 // let sameScopedLetVariable = 42;
-// let sameScopedLetVariable = 43;
+// let sameScopedLetVariable = 43;     // SyntaxError
 
 /** Illegal redeclaration of const variable */
 // const sameScopedConstVariable = 42;
-// const sameScopedConstVariable = 43;
+// const sameScopedConstVariable = 43;     // SyntaxError
 
 
 
 /**
  * RULE: A variable declared outside of any function is globally scoped and is accessible within any function regardless of
  *       whether it was declared using the `var`, `let`, or `const` keyword.
- *       - Only globally scoped variables may be shared between functions).
+ *       - Only globally scoped variables may be shared between functions.
  */
 /** declaration of global `let`, `var`, and `const` variables */
 var globalVarVariable = 42;
@@ -152,9 +160,9 @@ const globalConstVariable = 44;
 
 function func6() {
     /** Legal access of global `let`, `var`, and `const` variables in `func6` scope. */
-    console.log("globalVarVariable: " + globalVarVariable);     // 42
-    console.log("globalLetVariable: " + globalLetVariable);     // 43
-    console.log("globalConstVariable: " + globalConstVariable);    // 44
+    console.log("globalVarVariable: " + globalVarVariable);     // Output: 42
+    console.log("globalLetVariable: " + globalLetVariable);     // Output: 43
+    console.log("globalConstVariable: " + globalConstVariable);    // Output: 44
 
     /** Declaration of local `let`, `var`, and `const` variables in `func6` scope */
     var func6VarVariable = 1;
@@ -166,9 +174,9 @@ func6();
 
 function func7() {
     /** Legal access of global `let`, `var`, and `const` variables in `func7` scope. */
-    console.log("globalVarVariable: " + globalVarVariable);     // 42
-    console.log("globalLetVariable: " + globalLetVariable);     // 43
-    console.log("globalConstVariable: " + globalConstVariable);     // 44
+    console.log("globalVarVariable: " + globalVarVariable);     // Output: 42
+    console.log("globalLetVariable: " + globalLetVariable);     // Output: 43
+    console.log("globalConstVariable: " + globalConstVariable);     // Output: 44
 
     /** Illegal access of local, `func6`-scoped  `let`, `var`, and `const` variables outside `func6` scope. */
     // console.log("func6VarVariable: " + func6VarVariable);      // ReferenceError
@@ -183,13 +191,13 @@ func7();
  *  RULE: `var` variable declarations are hoisted/raised to the beginning of their scope, and can therefore be referenced
  *      before they have been declared.
  *      - Only the variable's declaration is hoisted but not the initialization/assignment. Hence, the hoisted `var` variable
- *        will have a value of `undefined` before its declaration.
+ *        will have a value of `undefined` where ever it is referenced before its declaration.
  *      - `let` and `const` variable declarations are not hoisted, so accessing a `let` or `const` variable before its declaration
  *        will yield a `ReferenceError`.
  */
 function func8(){
     /** Legal access of `var` variable before declaration due to hoisting. */
-    console.log("varVariable1: " + varVariable1);       // undefined
+    console.log("varVariable1: " + varVariable1);       // Output: undefined
 
     /** Declaration of `var` variable accessed above. */
     var varVariable1 = 42;
@@ -223,5 +231,5 @@ function func9(){
 func9();
 
 /** Legal access of global variable despite definition in function scope. */
-console.log("globalVariable: " + globalVariable)        // "I am a global variable!"
-console.log("globalVariable2: ", globalVariable2)       // 42
+console.log("globalVariable: " + globalVariable)        // Output: "I am a global variable!"
+console.log("globalVariable2: ", globalVariable2)       // Output: 42
