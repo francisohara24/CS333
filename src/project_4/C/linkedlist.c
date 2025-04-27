@@ -6,14 +6,12 @@
  */
 #include <stdio.h>
 #include <stdlib.h>
-#include "linkedlist.h";
+#include "linkedlist.h"
 
 
 LinkedList *ll_create() {
     LinkedList *list = (LinkedList *) malloc(sizeof(LinkedList));
-    list->head = (Node *) malloc(sizeof(Node));
-    list->head->data = NULL;
-    list->head->next = NULL;
+    list->head = NULL;
     return list;
 }
 
@@ -64,7 +62,7 @@ void *ll_remove(LinkedList *l, void *target, int (*compfunc)(void *, void *)) {
         return result;
     }
 
-    if (compfunc(l->head->data, target) == 0) {
+    if (compfunc(l->head->data, target) == 1) {
         result = l->head->data;
         l->head = l->head->next;
     } else {
@@ -72,7 +70,7 @@ void *ll_remove(LinkedList *l, void *target, int (*compfunc)(void *, void *)) {
         Node *current_node = l->head->next;
 
         while (current_node != NULL) {
-            if (compfunc(current_node->data, target) == 0) {
+            if (compfunc(current_node->data, target) == 1) {
                 result = current_node->data;
                 previous_node->next = current_node->next;
                 break;
@@ -92,7 +90,7 @@ void *ll_find(LinkedList *l, void *target, int (*compfunc)(void *, void *)) {
 
     Node *current_node = l->head;
     while (current_node != NULL) {
-        if (compfunc(current_node->data, target) == 0) {
+        if (compfunc(current_node->data, target) == 1) {
             return current_node->data;
         }
         current_node = current_node->next;
@@ -126,7 +124,7 @@ void ll_clear(LinkedList *l, void (*freefunc)(void *)) {
         current_node = temp;
     }
 
-    free(l);
+    l->head = NULL;
 }
 
 
