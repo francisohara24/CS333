@@ -59,7 +59,7 @@ void *ll_remove(LinkedList *l, void *target, int (*compfunc)(void *, void *)) {
     void *result = NULL;
 
     if (l->head == NULL) {
-        return result;
+        return NULL;
     }
 
     if (compfunc(l->head->data, target) == 1) {
